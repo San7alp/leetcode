@@ -1,41 +1,36 @@
+
 public class Lc42 {
-    public static void main(String args[]){
 
+    public static void main(String[] args) {
+        int arr[] = {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};
+        Lc42 candy = new Lc42();
+        System.out.println(candy.trap(arr));
     }
+
     public int trap(int[] height) {
-        int unit=0;
-        for(int i=0;i<height.length;i++){
-            int maxleft=Integer.MIN_VALUE;
-            int indexleft=0;
-            int maxright=Integer.MIN_VALUE;
-            int indexright=0;
-            for(int j=i;j>=0;j--){
-                if(height[j]>maxleft){
-                    maxleft=height[j];
-                    indexleft=j;
-                }
-                else{
-                    break;
-                }
-            }
-            for(int j=i;j<height.length;j++){
-                if(height[j]>maxright){
-                    maxright=height[j];
-                    indexright=j;
-                }
-                else{
-                    break;
-                }
-            }
-            int min=Math.min(height[indexleft],height[indexright]);
-
-            for(int x=indexleft;x<indexright;x++){
-                if(min-height[x]>0){
-                    unit+=min-height[x];
-                }
-            }
-
+        int maxleft[] = new int[height.length];
+        int maxright[] = new int[height.length];
+        int min[] = new int[height.length];
+        int max = 0;
+        for (int i = 0; i < height.length; i++) {
+            max = Math.max(height[i], max);
+            maxleft[i] = max;
         }
-        return unit;
+        int maxr = 0;
+        for (int i = height.length - 1; i >= 0; i--) {
+            maxr = Math.max(height[i], maxr);
+            maxright[i] = maxr;
+        }
+        for (int i = 0; i < height.length; i++) {
+            int m = Math.min(maxleft[i], maxright[i]);
+            min[i] = m;
+        }
+        int water = 0;
+        for (int i = 0; i < height.length; i++) {
+            if (min[i] - height[i] > 0) {
+                water += min[i] - height[i];
+            }
+        }
+        return water;
     }
 }
