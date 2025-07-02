@@ -35,7 +35,7 @@ class Solution {
          }//crossing if letter of the words have same frequency
         for(int i=0;i<arr1.length;i++){
             if(arr1[i]!=0){
-                return false;
+                return false;//if every letter have 0 freq then true
             }
         }
         return true;
