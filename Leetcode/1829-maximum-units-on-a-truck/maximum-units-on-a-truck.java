@@ -1,18 +1,7 @@
 class Solution {
     public int maximumUnits(int[][] boxTypes, int truckSize) {
         int res=0;
-        for(int i=0;i<boxTypes.length-1;i++){
-            for(int j=0;j<boxTypes.length-i-1;j++){
-                if(boxTypes[j][1]<=boxTypes[j+1][1]){
-                    int t=boxTypes[j][1];
-                    boxTypes[j][1]=boxTypes[j+1][1];
-                    boxTypes[j+1][1]=t;
-                    t=boxTypes[j][0];
-                    boxTypes[j][0]=boxTypes[j+1][0];
-                    boxTypes[j+1][0]=t;
-                }
-            }
-        }
+         Arrays.sort(boxTypes, (a, b) -> Integer.compare(b[1],a[1]));
         for(int i=0;i<boxTypes.length;i++){
             int capacity=0;
             if(truckSize==0){
