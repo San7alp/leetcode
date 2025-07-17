@@ -5,19 +5,14 @@ class Solution {
         int min=Integer.MAX_VALUE;
         while(start<=end){
             int mid=start+(end-start)/2;
-            if(nums[start]<=nums[mid]){
+            if(nums[mid]>=nums[start]){
                 min=Math.min(nums[start],min);
                 start=mid+1;
-
             }
             else{
-                 min=Math.min(nums[mid],min);
+                min=Math.min(nums[mid],min);
                 end=mid;
             }
-            // else{
-            //     min=Math.min(nums[mid],min);
-            // }
-    
         }
         return min;
     }
