@@ -14,29 +14,24 @@
  * }
  */
 class Solution {
-    int indx=0;
-    public TreeNode solve(int[] preorder, int[] inorder,int start,int end){
+    int index=0;
+    public TreeNode buildAlgo(int[] preorder, int[] inorder,int start,int end){
         if(start>end){
             return null;
         }
+        int rootval=preorder[index];
         int i=0;
-        int rootval=preorder[indx];
-        for(;i<end;i++){
-            if(rootval==inorder[i]){
-                break;
-            }
+        while(rootval!=inorder[i]){
+            i++;
         }
-        indx++;
+        index++;
         TreeNode root=new TreeNode();
         root.val=rootval;
-        root.left=solve(preorder,inorder,start,i-1);
-        root.right=solve(preorder,inorder,i+1,end);
+        root.left=buildAlgo( preorder,  inorder, start,i-1);
+        root.right=buildAlgo( preorder,  inorder, i+1,end);
         return root;
-
     }
     public TreeNode buildTree(int[] preorder, int[] inorder) {
-         indx=0;
-         int n=inorder.length;
-        return solve(preorder,inorder,0,n-1);
+        return buildAlgo(preorder,inorder,0,inorder.length-1);
     }
 }
