@@ -1,12 +1,18 @@
 class Solution {
     public int climbStairs(int n) {
-        int p1=1;
-        int p2=1;
-        for (int i=2;i<n+1;i++){
-            int sum=p1+p2;
-            p1=p2;
-            p2=sum;
+        int []dp=new int[n+1];
+        Arrays.fill(dp,-1);
+        return solve(dp,n);
+
+    }
+    public int solve(int [] dp,int n){
+        if(n==0){
+            return 1;
         }
-        return p2;
+        if(n<2){
+            return n;
+        }
+        if(dp[n]!=-1) return dp[n];
+        return dp[n]=solve(dp,n-1)+solve(dp,n-2);
     }
 }
