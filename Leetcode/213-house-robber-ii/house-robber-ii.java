@@ -3,7 +3,7 @@ class Solution {
         if(nums.length==1){
             return nums[0];
         }
-        int[]t=new int[nums.length+1];
+        
         int prev=0;int curr=0;
         for(int i=1;i<nums.length;i++){
             int skip=curr;
@@ -12,7 +12,7 @@ class Solution {
             curr=Math.max(skip,steal);
         }
         int r1=curr;
-        Arrays.fill(t,0);
+       
         prev=0;curr=0;
         for(int i=2;i<nums.length+1;i++){
             int skip=curr;
