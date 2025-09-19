@@ -1,23 +1,21 @@
 class Solution {
     public String replaceWords(List<String> dictionary, String sentence) {
-        HashSet<String> set=new HashSet<>(dictionary);
+        HashSet<String>set=new HashSet<>(dictionary);
         ArrayList<String>list=new ArrayList<>(Arrays.asList(sentence.split(" ")));
         StringBuilder res=new StringBuilder();
-        for(String t:list){
-            int i=0;
-            while(i<=t.length()){
-                String s=t.substring(0,i);
-                i++;
-                if(set.contains(s)){
-                    res.append(s).append(" ");
+        for(String s:list){
+            boolean flag=false;
+            for(int i=0;i<=s.length();i++){
+                if(set.contains(s.substring(0,i))){
+                    res.append(s.substring(0,i)).append(" ");
+                    flag=true;
                     break;
                 }
-                if(i==t.length()+1){
-                    res.append(t).append(" ");
-                }
+            }
+            if(!flag){
+                res.append(s).append(" ");
             }
         }
-        res.deleteCharAt(res.length()-1);
-        return res.toString();
+        return res.substring(0,res.length()-1).toString();
     }
 }
