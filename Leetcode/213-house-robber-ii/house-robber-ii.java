@@ -3,23 +3,24 @@ class Solution {
         if(nums.length==1){
             return nums[0];
         }
+        int[]dp=new int[nums.length];
+        Arrays.fill(dp,-1);
+        int s1=solve(dp,nums,0,nums.length-1);
+        Arrays.fill(dp,-1);
+        int s2=solve(dp,nums,1,nums.length);
+        return Math.max(s1,s2);
+    }
+    public int solve(int []dp,int []nums,int i,int n){
+        if(i>=n){
+            return 0;
+        }
+        if(dp[i]!=-1){
+            return dp[i];
+        }
+        int take=nums[i]+solve(dp,nums,i+2,n);
+        int leave=solve(dp,nums,i+1,n);
+        return dp[i]=Math.max(take,leave);
         
-        int prev=0;int curr=0;
-        for(int i=1;i<nums.length;i++){
-            int skip=curr;
-            int steal=nums[i-1]+((i-2>=0) ? prev :0);
-            prev=curr;
-            curr=Math.max(skip,steal);
-        }
-        int r1=curr;
-       
-        prev=0;curr=0;
-        for(int i=2;i<nums.length+1;i++){
-            int skip=curr;
-            int steal=nums[i-1]+prev;
-            prev=curr;
-            curr=Math.max(skip,steal);
-        }
-    return Math.max(r1,curr);
+
     }
 }
